@@ -89,18 +89,23 @@ function App() {
       </div>
 
       {/* Footer */}
-      <footer className="relative z-10 py-4 text-center text-white/80 backdrop-blur-sm">
-        <p className="text-sm">
-          Made with <span className="text-red-500 animate-pulse">❤</span> by{' '}
-          <a 
-            href="https://soumyodeep-dey.vercel.app/" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="text-white hover:text-purple-200 transition-colors underline decoration-dotted"
-          >
-            Soumyodeep Dey
-          </a>
-        </p>
+      <footer className="relative z-10 py-6 text-center bg-black/20 backdrop-blur-md border-t border-white/10">
+        <div className="max-w-3xl mx-auto px-4">
+          <p className="text-base font-medium">
+            Made with <span className="text-red-500 animate-pulse text-xl">❤</span> by{' '}
+            <a 
+              href="https://soumyodeep-dey.vercel.app/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-white hover:text-purple-200 transition-all duration-300 underline decoration-dotted hover:decoration-solid hover:scale-105 inline-block"
+            >
+              Soumyodeep Dey
+            </a>
+          </p>
+          <p className="text-sm text-white/70 mt-2">
+            AI Job Recommendation System © {new Date().getFullYear()}
+          </p>
+        </div>
       </footer>
     </div>
   )
