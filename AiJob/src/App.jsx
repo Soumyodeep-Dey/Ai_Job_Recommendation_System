@@ -93,7 +93,7 @@ function App() {
         <p className="text-sm">
           Made with <span className="text-red-500 animate-pulse">❤</span> by{' '}
           <a 
-            href="https://soumyodeepdey.vercel.app" 
+            href="https://soumyodeep-dey.vercel.app/" 
             target="_blank" 
             rel="noopener noreferrer"
             className="text-white hover:text-purple-200 transition-colors underline decoration-dotted"
