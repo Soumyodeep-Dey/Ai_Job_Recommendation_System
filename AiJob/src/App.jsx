@@ -30,9 +30,12 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100">
-      <div className="container mx-auto px-4 py-16">
-        <div className="max-w-3xl mx-auto bg-white rounded-lg shadow-lg p-8">
+    <div className="min-h-screen bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 relative flex flex-col">
+      {/* Background Pattern */}
+      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0zNiAzNGMwIDIuMjA5LTEuNzkxIDQtNCA0cy00LTEuNzkxLTQtNCAxLjc5MS00IDQtNCA0IDEuNzkxIDQgNHoiIGZpbGw9IiNmZmZmZmYiIGZpbGwtb3BhY2l0eT0iLjEiLz48L2c+PC9zdmc+')] opacity-20"></div>
+      
+      <div className="container mx-auto px-4 py-16 relative z-10 flex-grow">
+        <div className="max-w-3xl mx-auto bg-white/90 backdrop-blur-sm rounded-lg shadow-xl p-8">
           <h1 className="text-4xl font-bold text-center text-gray-800 mb-8">
             AI Job Recommendation System
           </h1>
@@ -43,7 +46,7 @@ function App() {
             </p>
           </div>
 
-          <div className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center">
+          <div className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center bg-white/50 backdrop-blur-sm">
             <input
               type="file"
               accept=".pdf,.doc,.docx"
@@ -53,7 +56,7 @@ function App() {
             />
             <label
               htmlFor="resume-upload"
-              className="cursor-pointer inline-block bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 transition-colors"
+              className="cursor-pointer inline-block bg-gradient-to-r from-blue-500 to-purple-500 text-white px-6 py-3 rounded-lg hover:from-blue-600 hover:to-purple-600 transition-all transform hover:scale-105 shadow-lg"
             >
               Choose Resume
             </label>
@@ -69,8 +72,8 @@ function App() {
                   className={`mt-4 px-6 py-2 rounded-lg ${
                     uploading
                       ? 'bg-gray-400 cursor-not-allowed'
-                      : 'bg-green-500 hover:bg-green-600'
-                  } text-white transition-colors`}
+                      : 'bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600'
+                  } text-white transition-all transform hover:scale-105 shadow-lg`}
                 >
                   {uploading ? 'Uploading...' : 'Upload Resume'}
                 </button>
@@ -84,6 +87,21 @@ function App() {
           </div>
         </div>
       </div>
+
+      {/* Footer */}
+      <footer className="relative z-10 py-4 text-center text-white/80 backdrop-blur-sm">
+        <p className="text-sm">
+          Made with <span className="text-red-500 animate-pulse">❤</span> by{' '}
+          <a 
+            href="https://soumyodeepdey.vercel.app" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="text-white hover:text-purple-200 transition-colors underline decoration-dotted"
+          >
+            Soumyodeep Dey
+          </a>
+        </p>
+      </footer>
     </div>
   )
 }
