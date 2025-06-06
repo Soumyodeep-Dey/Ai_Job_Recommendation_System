@@ -97,7 +97,7 @@ function App() {
               href="https://soumyodeep-dey.vercel.app/" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="text-white hover:text-purple-200 transition-all duration-300 underline decoration-dotted hover:decoration-solid hover:scale-105 inline-block"
+              className="text-white hover:text-purple-200 transition-all duration-300 hover:decoration-solid hover:scale-105 inline-block"
             >
               Soumyodeep Dey
             </a>
