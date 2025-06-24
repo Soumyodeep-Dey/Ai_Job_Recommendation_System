@@ -1,57 +1,59 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReactMarkdown from 'react-markdown';
+import { FaUserTie, FaLightbulb } from 'react-icons/fa';
+
+const parseSections = (raw) => {
+    // Try to split the AI response into roles and improvements
+    const rolesMatch = raw.match(/good fit for these roles:(.*?)(Improvements:|$)/is);
+    const improvementsMatch = raw.match(/Improvements:(.*)/is);
+    const roles = rolesMatch ? rolesMatch[1].replace(/because:/i, '').trim() : '';
+    const improvements = improvementsMatch ? improvementsMatch[1].trim() : '';
+    return { roles, improvements };
+};
+
+const TabButton = ({ active, onClick, children }) => (
+    <button
+        className={`px-4 py-2 rounded-t-lg font-semibold transition-all duration-200 focus:outline-none ${active ? 'bg-white/80 text-blue-700 shadow' : 'bg-white/40 text-gray-500 hover:bg-white/60'}`}
+        onClick={onClick}
+        type="button"
+    >
+        {children}
+    </button>
+);
 
 const JobRecommendation = ({ data }) => {
     if (!data) return null;
 
     const { skills, experience_summary, desired_roles, raw } = data;
+    const [tab, setTab] = useState('roles');
+    const { roles, improvements } = parseSections(raw || '');
 
     return (
-        <div className="mt-10 p-6 bg-white rounded-lg shadow-lg">
-            <h2 className="text-2xl font-semibold mb-4 text-gray-800">Recommended Jobs:</h2>
-
-            {skills && skills.length > 0 && (
-                <div className="mb-6">
-                    <h3 className="text-lg font-medium text-gray-700 mb-2">Skills:</h3>
-                    <div className="flex flex-wrap gap-2">
-                        {skills.map((skill, index) => (
-                            <span
-                                key={index}
-                                className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium"
-                            >
-                                {skill}
-                            </span>
-                        ))}
-                    </div>
-                </div>
-            )}
-
-            {experience_summary && (
-                <div className="mb-6">
-                    <h3 className="text-lg font-medium text-gray-700 mb-2">Experience Summary:</h3>
-                    <p className="text-gray-600">{experience_summary}</p>
-                </div>
-            )}
-
-            {desired_roles && desired_roles.length > 0 && (
-                <div className="mb-6">
-                    <h3 className="text-lg font-medium text-gray-700 mb-2">Suggested Job Roles:</h3>
-                    <ul className="list-disc list-inside text-gray-600">
-                        {desired_roles.map((role, index) => (
-                            <li key={index}>{role}</li>
-                        ))}
-                    </ul>
-                </div>
-            )}
-
-            {raw && (
-                <div className="mt-4">
-                    <h3 className="text-lg font-medium text-gray-700 mb-2">AI Response:</h3>
+        <div className="mt-10 p-0 bg-white/30 backdrop-blur-2xl rounded-2xl shadow-xl border border-white/20 animate-fade-in">
+            <div className="flex items-center gap-3 px-6 pt-6">
+                <FaUserTie className="text-2xl text-blue-600" />
+                <h2 className="text-2xl font-bold text-gray-900 tracking-tight">AI Recommendation</h2>
+            </div>
+            <div className="flex mt-4 border-b border-white/30 px-6">
+                <TabButton active={tab === 'roles'} onClick={() => setTab('roles')}>
+                    <FaUserTie className="inline mr-2" /> Roles
+                </TabButton>
+                <TabButton active={tab === 'improvements'} onClick={() => setTab('improvements')}>
+                    <FaLightbulb className="inline mr-2" /> Improvements
+                </TabButton>
+            </div>
+            <div className="px-6 pb-6 pt-4">
+                {tab === 'roles' && (
                     <div className="prose max-w-none text-gray-800">
-                        <ReactMarkdown>{raw}</ReactMarkdown>
+                        <ReactMarkdown>{roles || 'No roles found.'}</ReactMarkdown>
                     </div>
-                </div>
-            )}
+                )}
+                {tab === 'improvements' && (
+                    <div className="prose max-w-none text-gray-800">
+                        <ReactMarkdown>{improvements || 'No improvements found.'}</ReactMarkdown>
+                    </div>
+                )}
+            </div>
         </div>
     );
 };
