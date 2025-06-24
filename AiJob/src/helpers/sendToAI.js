@@ -15,25 +15,26 @@ export const sendToAI = async (resumeText) => {
     try {
         const prompt = promptTemplate.replace('[PASTE RESUME TEXT HERE]', resumeText);
 
-        const response = await fetch('https://api.studio.nebius.cloud/v1/chat/completions', {
+        const response = await fetch('https://api.studio.nebius.com/v1/chat/completions', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                Authorization: `Bearer ${process.env.NEBIUS_API_KEY}`,
+                'Accept': '*/*',
+                Authorization: `Bearer ${import.meta.env.GPT_API_KEY}`,
             },
             body: JSON.stringify({
-                model: 'deepseek-ai/DeepSeek-R1-0528',
+                model: "Qwen/Qwen3-4B-fast",
                 messages: [
                     {
                         role: 'system',
-                        content: 'You are an AI assistant that extracts job skills and recommends roles based on resumes.',
+                        content: 'SYSTEM_PROMPT',
                     },
                     {
                         role: 'user',
                         content: [
                             {
                                 type: 'text',
-                                text: prompt,
+                                text: 'USER_MESSAGE',
                             },
                         ],
                     },
@@ -58,3 +59,5 @@ export const sendToAI = async (resumeText) => {
         throw error;
     }
 };
+
+console.log('API KEY:', import.meta.env.VITE_NEBIUS_API_KEY);

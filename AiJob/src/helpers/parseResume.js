@@ -1,7 +1,10 @@
 import * as pdfjsLib from 'pdfjs-dist';
+import pdfjsWorker from 'pdfjs-dist/build/pdf.worker?url';
 import mammoth from 'mammoth';
 
- 
+// Set the workerSrc for PDF.js
+pdfjsLib.GlobalWorkerOptions.workerSrc = pdfjsWorker;
+
 const readPDF = async (file) => {
     const arrayBuffer = await file.arrayBuffer();
     const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
