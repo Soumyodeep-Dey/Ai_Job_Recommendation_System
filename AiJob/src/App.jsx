@@ -31,6 +31,7 @@ function App() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 relative flex flex-col">
+      
       {/* Background Pattern */}
       <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0zNiAzNGMwIDIuMjA5LTEuNzkxIDQtNCA0cy00LTEuNzkxLTQtNCAxLjc5MS00IDQtNCA0IDEuNzkxIDQgNHoiIGZpbGw9IiNmZmZmZmYiIGZpbGwtb3BhY2l0eT0iLjEiLz48L2c+PC9zdmc+')] opacity-20"></div>
       
@@ -40,12 +41,16 @@ function App() {
             AI Job Recommendation System
           </h1>
           
+          {/* Subtitle */}
           <div className="text-center mb-8">
             <p className="text-lg text-gray-600">
               Upload your resume and let our AI find the perfect job matches for you
             </p>
           </div>
 
+
+
+          {/* Resume Upload Section includes upload button*/}
           <div className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center bg-white/50 backdrop-blur-sm">
             <input
               type="file"
@@ -60,7 +65,8 @@ function App() {
             >
               Choose Resume
             </label>
-            
+
+            {/* uploaded file display and upload button */}
             {file && (
               <div className="mt-4">
                 <p className="text-gray-600">
@@ -81,6 +87,8 @@ function App() {
             )}
           </div>
 
+
+          {/* format and size information */}
           <div className="mt-8 text-center text-sm text-gray-500">
             <p>Supported formats: PDF, DOC, DOCX</p>
             <p>Maximum file size: 5MB</p>
