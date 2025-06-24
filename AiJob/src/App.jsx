@@ -3,6 +3,8 @@ import './index.css';
 import parseResume from './helpers/parseResume';
 import { sendToAI } from './helpers/sendToAI';
 import JobRecommendation from './components/JobRecommendation';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 function App() {
@@ -12,21 +14,27 @@ function App() {
 
   const handleFileChange = (e) => {
     const selectedFile = e.target.files[0];
+    const maxSize = 5 * 1024 * 1024; // 5MB in bytes
+
     if (
       selectedFile &&
       (selectedFile.type === 'application/pdf' ||
         selectedFile.type === 'application/msword' ||
         selectedFile.type === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document')
     ) {
+      if (selectedFile.size > maxSize) {
+        toast.error('File size exceeds 5MB limit');
+        return;
+      }
       setFile(selectedFile);
     } else {
-      alert('Please upload a PDF or Word document');
+      toast.error('Please upload a PDF or Word document');
     }
   };
 
   const handleUpload = async () => {
     if (!file) {
-      alert('Please select a file first');
+      toast.error('Please select a file first');
       return;
     }
 
@@ -37,7 +45,7 @@ function App() {
       setRecommendations(aiResponse);
     } catch (error) {
       console.error(error);
-      alert('Something went wrong. Please try again.');
+      toast.error('Something went wrong. Please try again.');
     } finally {
       setUploading(false);
       setFile(null);
@@ -124,6 +132,7 @@ function App() {
             </p>
           </div>
         </footer>
+        <ToastContainer position="top-right" autoClose={4000} hideProgressBar={false} newestOnTop closeOnClick pauseOnFocusLoss draggable pauseOnHover />
       </div>
    
   );
