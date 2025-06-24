@@ -35,6 +35,8 @@ const parseResume = async (file) => {
     } else {
         throw new Error('Unsupported file format');
     }
+    
+    console.log(resumeText)
 
     return resumeText;
 };
