@@ -20,7 +20,7 @@ export const sendToAI = async (resumeText) => {
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': '*/*',
-                Authorization: `Bearer ${import.meta.env.GPT_API_KEY}`,
+                Authorization: `Bearer ${import.meta.env.NEBIUS_API_KEY}`,
             },
             body: JSON.stringify({
                 model: "Qwen/Qwen3-4B-fast",
@@ -34,7 +34,7 @@ export const sendToAI = async (resumeText) => {
                         content: [
                             {
                                 type: 'text',
-                                text: 'USER_MESSAGE',
+                                text: prompt,
                             },
                         ],
                     },
