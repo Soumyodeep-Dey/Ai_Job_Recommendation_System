@@ -15,29 +15,43 @@ export const sendToAI = async (resumeText) => {
     try {
         const prompt = promptTemplate.replace('[PASTE RESUME TEXT HERE]', resumeText);
 
-        const response = await fetch('https://api.openai.com/v1/chat/completions', {
+        const response = await fetch('https://api.studio.nebius.cloud/v1/chat/completions', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                Authorization: `Bearer ${process.env.REACT_APP_OPENAI_API_KEY}`,
+                Authorization: `Bearer ${process.env.NEBIUS_API_KEY}`,
             },
             body: JSON.stringify({
-                model: 'gpt-3.5-turbo',
-                messages: [{ role: 'user', content: prompt }],
+                model: 'deepseek-ai/DeepSeek-R1-0528',
+                messages: [
+                    {
+                        role: 'system',
+                        content: 'You are an AI assistant that extracts job skills and recommends roles based on resumes.',
+                    },
+                    {
+                        role: 'user',
+                        content: [
+                            {
+                                type: 'text',
+                                text: prompt,
+                            },
+                        ],
+                    },
+                ],
             }),
         });
 
         if (!response.ok) {
-            throw new Error('Failed to fetch AI response');
+            throw new Error(`Failed to fetch AI response: ${response.statusText}`);
         }
 
         const result = await response.json();
         const content = result.choices[0].message.content;
 
         try {
-            return JSON.parse(content); // If AI responds in proper JSON
+            return JSON.parse(content);
         } catch {
-            return { raw: content }; // If response is plain text
+            return { raw: content };
         }
     } catch (error) {
         console.error('Error sending to AI:', error);
