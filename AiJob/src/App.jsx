@@ -133,7 +133,7 @@ function App() {
       <footer className="relative z-10 py-6 text-center w-full bg-black/20 backdrop-blur-md border-t border-white/10 mt-8">
         <div className="max-w-3xl mx-auto px-4">
           <p className="text-base font-medium">
-            Made with <span className="text-red-500 animate-pulse text-xl">❤</span> by{' '}
+            Made by {' '}
             <a
               href="https://soumyodeep-dey.vercel.app/"
               target="_blank"
