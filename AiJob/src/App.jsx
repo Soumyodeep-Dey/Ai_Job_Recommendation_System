@@ -63,8 +63,8 @@ function App() {
       const aiResponse = await sendToAI(resumeText);
       setRecommendations(aiResponse);
     } catch (error) {
-      console.error(error);
-      toast.error('Something went wrong. Please try again.');
+      // Do NOT log error to console (prevents API key exposure)
+      toast.error('Something went wrong. Please retry.');
     } finally {
       setUploading(false);
       setFile(null);
